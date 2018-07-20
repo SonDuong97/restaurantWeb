@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Go to HomePage
+Route::get('index', ['as' => 'home', 'uses' => 'ControllerPage@goToHomePage']);
+
+// Login 
+Route::get('login', ['as' => 'login', 'uses' => 'LoginController@getLogin']);
+Route::post('postForm', ['as' => 'postForm', 'uses' => 'LoginController@postLogin']);
+
+// Logout
+Route::get('logout', ['as' => 'logout', 'uses' => 'ControllerPage@logout']);
