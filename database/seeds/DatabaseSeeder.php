@@ -13,10 +13,12 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         // 
-        // $this->call(categorySeeder::class);
-        // $this->call(eatingSeeder::class);
-        // $this->call(settingSeeder::class);
+        $this->call(categorySeeder::class);
+        $this->call(eatingSeeder::class);
+        $this->call(settingSeeder::class);
         $this->call(userSeeder::class);
+        $this->call(orderSeeder::class);
+        $this->call(eatingOrderSeeder::class);
     }
 }
 
@@ -43,13 +45,13 @@ class eatingSeeder extends Seeder
 	public function run()
 	{
 		DB::table('eating')->insert([
-			['eatingName' => 'Tzatsiki', 'id_category' => 1, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 3.99],
-			['eatingName' => 'Aubergine_Salad', 'id_category' => 1, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.50],
-			['eatingName' => 'Aubergine_Salad', 'id_category' => 1, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.25],
-			['eatingName' => 'Haloumi', 'id_category' => 2, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 3.99],
-			['eatingName' => 'Spinach_Pie', 'id_category' => 2, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.50],
-			['eatingName' => 'Olive_Special', 'id_category' => 3, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 5.99],
-			['eatingName' => 'Cornish_Mackerel', 'id_category' => 4, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 5.99]
+			['eatingName' => 'Tzatsiki', 'category_id' => 1, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 3.99],
+			['eatingName' => 'Aubergine_Salad', 'category_id' => 1, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.50],
+			['eatingName' => 'Aubergine_Salad', 'category_id' => 1, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.25],
+			['eatingName' => 'Haloumi', 'category_id' => 2, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 3.99],
+			['eatingName' => 'Spinach_Pie', 'category_id' => 2, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.50],
+			['eatingName' => 'Olive_Special', 'category_id' => 3, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 5.99],
+			['eatingName' => 'Cornish_Mackerel', 'category_id' => 4, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 5.99]
 
 		]);
 	}
@@ -79,7 +81,35 @@ class userSeeder extends Seeder
 	public function run()
 	{
 		DB::table('users')->insert([
-			['name' => 'son', 'email' => 'duongson29111997@gmail.com', 'password' => bcrypt("12345")]
+			['name' => 'son', 'email' => 'son@gmail.com', 'password' => bcrypt("son")],
+			['name' => 'trung', 'email' => 'trung@gmail.com', 'password' => bcrypt("trung")], 
+			['name' => 'dat', 'email' => 'dat@gmail.com', 'password' => bcrypt("dat")], 
+			['name' => 'thuong', 'email' => 'thuong@gmail.com', 'password' => bcrypt("thuong")], 
+			['name' => 'hai', 'email' => 'hai@gmail.com', 'password' => bcrypt("hai")],
+			['name' => 'Duong Son', 'email' => 'duongson29111997@gmail.com', 'password' => bcrypt("son")]
+		]);
+	}
+}
+
+class orderSeeder extends Seeder
+{
+	public function run()
+	{
+		DB::table('order')->insert([
+			['user_id' => 1, 'status' => 'Cancelled', 'total_money' => 100000],
+			['user_id' => 1, 'status' => 'Completed', 'total_money' => 20000000]
+		]);
+	}
+}
+
+class eatingOrderSeeder extends Seeder
+{
+	public function run()
+	{
+		DB::table('eating_order')->insert([
+			['order_id' => 1, 'eating_id' => 1, 'quantity' => 2],
+			['order_id' => 1, 'eating_id' => 2, 'quantity' => 3],
+			['order_id' => 2, 'eating_id' => 3, 'quantity' => 1],
 		]);
 	}
 }

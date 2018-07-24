@@ -16,8 +16,7 @@ class CreateEating extends Migration
         Schema::create('eating', function (Blueprint $table) {
             $table->increments('id');
             $table->string('eatingName', 100);
-            $table->integer('id_category')->unsigned();
-            $table->foreign('id_category')->references('id')->on('category');
+            $table->integer('category_id')->unsigned();
         });
     }
 

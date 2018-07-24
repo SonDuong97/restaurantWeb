@@ -26,9 +26,14 @@ class LoginController extends Controller
     	// }
     	// 
     	if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-    		return redirect()->route('home');    		// echo "hello";;
+            $user = Auth::user();
+            if (strcmp($user->email, "duongson29111997@gmail.com") == 0)
+                return redirect()->route('showListProduct');
+            else
+        		return redirect()->route('home');    		// echo "hello";;
     	} else {
-    		echo "k dc";
+    		// echo "k dc";
+            return redirect()->back()->withInput();
     		// return redirect()->back();
     	}
     	// echo "hello".$request->email;

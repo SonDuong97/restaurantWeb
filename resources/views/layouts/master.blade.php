@@ -46,66 +46,58 @@
         <div style="clear: both;"></div>
         <div id="menu">
             <div id="container-left">
-                @for($i = 1; $i <= 2; $i++)
+                @foreach($category as $cate)
                         <div id="appetisers" class="eating">
                             <ul class="list">
                                 <li>
                                     <div id="sub-appertisers">
-                                        @foreach($category as $c)
-                                            @if($c->id == $i)
-                                                <div class="type-eating font-yeseva-one">
-                                                    {{$c->categoryName}}
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                        @foreach($eating[$i] as $e)
-                                            <ul class="list">
-                                                <li class="name-and-cost">
-                                                    <span class="name-eating">{{$e->eatingName}}</span>
-                                                    <span class="cost">${{$e->cost}}</span>
-                                                </li>
-                                                <!-- <img src="assets/images/line.png"> -->
-                                                <li>
-                                                    <p class="description-eating">{{$e->description}}</p>
-                                                </li>
-                                            </ul>
-                                        @endforeach
+                                        @if ($cate->id == 1 || $cate->id == 2)
+                                            <div class="type-eating font-yeseva-one">{{$cate->categoryName}}</div>
+                                            @foreach($cate->eating as $eating)
+                                                <ul class="list">
+                                                    <li class="name-and-cost">
+                                                        <span class="name-eating">{{$eating->eatingName}}</span>
+                                                        <span class="cost">${{$eating->cost}}</span>
+                                                    </li>
+                                                    <!-- <img src="assets/images/line.png"> -->
+                                                    <li>
+                                                        <p class="description-eating">{{$eating->description}}</p>
+                                                    </li>
+                                                </ul>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                @endfor
+                @endforeach
             </div>
             <div id="container-right">
-                @for($i = 3; $i <= 4; $i++)
+                @foreach($category as $cate)
                         <div id="appetisers" class="eating">
                             <ul class="list">
                                 <li>
                                     <div id="sub-appertisers">
-                                        @foreach($category as $c)
-                                            @if($c->id == $i)
-                                                <div class="type-eating font-yeseva-one">
-                                                    {{$c->categoryName}}
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                        @foreach($eating[$i] as $e)
-                                            <ul class="list">
-                                                <li class="name-and-cost">
-                                                    <span class="name-eating">{{$e->eatingName}}</span>
-                                                    <span class="cost">${{$e->cost}}</span>
-                                                </li>
-                                                <!-- <img src="assets/images/line.png"> -->
-                                                <li>
-                                                    <p class="description-eating">{{$e->description}}</p>
-                                                </li>
-                                            </ul>
-                                        @endforeach
+                                        @if ($cate->id == 3 || $cate->id == 4)
+                                            <div class="type-eating font-yeseva-one">{{$cate->categoryName}}</div>
+                                            @foreach($cate->eating as $eating)
+                                                <ul class="list">
+                                                    <li class="name-and-cost">
+                                                        <span class="name-eating">{{$eating->eatingName}}</span>
+                                                        <span class="cost">${{$eating->cost}}</span>
+                                                    </li>
+                                                    <!-- <img src="assets/images/line.png"> -->
+                                                    <li>
+                                                        <p class="description-eating">{{$eating->description}}</p>
+                                                    </li>
+                                                </ul>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                @endfor
+                @endforeach
             </div>
             <div style="clear: both;"></div>
         </div>
