@@ -96,8 +96,8 @@ class orderSeeder extends Seeder
 	public function run()
 	{
 		DB::table('order')->insert([
-			['user_id' => 1, 'status' => 'Cancelled', 'total_money' => 100000],
-			['user_id' => 1, 'status' => 'Completed', 'total_money' => 20000000]
+			['user_id' => 1, 'status' => 'Cancelled', 'total_money' => 11.3],
+			['user_id' => 1, 'status' => 'Completed', 'total_money' => 1.2]
 		]);
 	}
 }

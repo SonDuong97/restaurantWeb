@@ -25,17 +25,32 @@ class LoginController extends Controller
     	// 	if (Auth::attempt(['name' => $user->name]))
     	// }
     	// 
-    	if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
-            if (strcmp($user->email, "duongson29111997@gmail.com") == 0)
-                return redirect()->route('showListProduct');
-            else
-        		return redirect()->route('home');    		// echo "hello";;
-    	} else {
-    		// echo "k dc";
-            return redirect()->back()->withInput();
-    		// return redirect()->back();
-    	}
+        $rules = [
+            'email' =>'required|email',
+            'password' => 'required|min:3'
+        ];
+        $messages = [
+            'required' => ':attribute is required.',
+            'email' => ':attribute is email.',
+            'min' => 'The length of :attribute is :min',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                $user = Auth::user();
+                if (strcmp($user->email, "duongson29111997@gmail.com") == 0)
+                    return redirect()->route('showListProduct');
+                else
+                    return redirect()->route('home');           // echo "hello";;
+            } else {
+                // echo "k dc";
+                return redirect()->back()->with('notification', 'Email and password is incorrect')->withInput();
+                // return redirect()->back();
+            }
+        }
+    	
     	// echo "hello".$request->email;
     }
     // 

@@ -122,11 +122,22 @@
 	color: white;
 }
 
-.login, .logout {
+#login {
 	text-decoration: none;
 	color: white;
+	border: 1px solid white;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding: 1% 2%;
 }
 
+#output-content {
+	font-size: 300%;
+}
+
+.button {
+    text-decoration: none;
+    color: white;
+}
 /*Mobile*/
 
 @media screen and (max-width: 576px) {
@@ -818,9 +829,12 @@
     #sns {
         float: right;
     }
+	#login {
+		float: right;
+	}
 
     .fab {
-        color: #dab33e;
+        color: white;
         text-decoration: none;
         display: inline-block;
         margin-right: 10px;

@@ -11,12 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Go to HomePage
-Route::get('index', ['as' => 'home', 'uses' => 'ControllerPage@goToHomePage']);
+Route::get('/', ['as' => 'home', 'middleware' => 'index','uses' => 'ControllerPage@goToHomePage']);
 
 // Login 
 Route::get('login', ['as' => 'login', 'uses' => 'LoginController@getLogin']);
@@ -24,6 +20,9 @@ Route::post('postForm', ['as' => 'postForm', 'uses' => 'LoginController@postLogi
 
 // Logout
 Route::get('logout', ['as' => 'logout', 'uses' => 'ControllerPage@logout']);
+
+//Order 
+Route::match(['get', 'post'],'order', ['as' => 'order', 'middleware' => 'order', 'uses' => 'ControllerPage@order']);
 
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => 'login'], function () {

@@ -16,8 +16,8 @@ class Order extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('total_money')->unsigned();
-            $table->string('status', 100);
+            $table->float('total_money');
+            $table->string('status', 100)->default("Waiting");
             $table->timestamps();
         });
     }
