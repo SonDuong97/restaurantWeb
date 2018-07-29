@@ -44,19 +44,22 @@ class ControllerPage extends Controller
     // }
     public function order(Request $request)
     {   
-            $order = new order;
-            $eating = eating::find($request->idEating);
-            $order->user_id = Auth::user()->id;
-            $order->total_money = $eating->cost * $request->quantity;
-            $order->save();
-            $eating_order = new eating_order;
-            $eating_order->order_id = $order->id;
-            $eating_order->eating_id = $request->idEating;
-            $eating_order->quantity = $request->quantity;
-            $eating_order->save();
-            // $message = "Successed! Click OK button to back to HOMEPAGE.";
-            // echo "<script type='text/javascript'>alert('$message')</script>";
-            return redirect()->route('home')->with('notification', 'Successed!Click OK button go to HOMEPAGE.');
+        $order = new order;
+        $eating = eating::find($request->idEating);
+        $order->user_id = Auth::user()->id;
+        $order->total_money = $eating->cost * $request->quantity;
+        $order->save();
+        $eating_order = new eating_order;
+        $eating_order->order_id = $order->id;
+        $eating_order->eating_id = $request->idEating;
+        $eating_order->quantity = $request->quantity;
+        $eating_order->save();
+        // $message = "Successed! Click OK button to back to HOMEPAGE.";
+        // echo "<script type='text/javascript'>alert('$message')</script>";
+        // return redirect()->route('home')->with('notification', 'Successed!Click OK button go to HOMEPAGE.');
+        // $arr = ['notification' => 'Successed'];
+        // return response()->json([$arr]);
+        echo "Successed";
             // echo $request->idEating;
     }
 }

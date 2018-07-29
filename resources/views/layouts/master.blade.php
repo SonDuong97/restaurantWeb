@@ -160,7 +160,7 @@
         </div>
     </div>
     {{-- Order box --}}
-    <div id="order-box" class="w3-modal">
+    {{-- <div id="order-box" class="w3-modal">
         <div class="w3-modal-content w3-card-4 w3-animate-top" style="max-width: 30%;">
             <header class="w3-container w3-teal"> 
                 <span onclick="document.getElementById('order-box').style.display='none'" 
@@ -191,7 +191,100 @@
                 <p>Modal Footer</p>
             </footer>
         </div>
+    </div> --}}
+    <div id="order-box" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-top" style="max-width: 30%;">
+            <header class="w3-container w3-teal"> 
+                <span onclick="document.getElementById('order-box').style.display='none'" 
+                class="w3-button w3-display-topright">&times;</span>
+                <h2>Order</h2>
+            </header>
+            <div class="w3-container">
+                <div id="output-content" style="font-size: 250%;">Name</div>
+                <div class="form-group">
+                    <div>
+                        {{csrf_field()}}
+                        <h5>Quantity</h5>
+                        <select class="form-control" name="quantity" id="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                        <input class="form-control" name="idEating" id="idEating" type="hidden" value=""/>
+                        <input class="w3-button" type="button" name="order" id="order" value="ORDER">
+                        <div id="yesno-box" class="w3-modal">
+                            <div class="w3-modal-content w3-card-4 w3-animate-top" style="max-width: 30%;">
+                                <header class="w3-container w3-teal"> 
+                                    <span onclick="document.getElementById('yesno-box').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                    <h2>REALLY</h2>
+                                </header>
+                                <div class="w3-container">
+                                    <div>Ban co thuc su muon dat hang?</div>
+                                    <button class="w3-button" id="yes">YES</button>
+                                    <button class="w3-button" id="no">NO</button>
+                                </div>
+                            </div>
+                        </div>    
+                        
+                        {{-- <button type="submit" class="btn btn-default" style="margin-top: 2%;">ORDER</button> --}}
+                        <div id="notification"></div>
+                    </div>
+                </div>
+            </div>
+            <footer class="w3-container w3-teal">
+                <p>Modal Footer</p>
+            </footer>
+        </div>
+    </div>
+    <div id="login-box" class="w3-modal" style="background-color: rgba(255, 255, 255, 0.3);">
+        <div class="w3-modal-content w3-card-4 w3-animate-top" style="margin: auto;padding: 5%;max-width: 30%;">
+            <header class="w3-container w3-teal"> 
+                    <span onclick="document.getElementById('login-box').style.display='none'" 
+                    class="w3-button w3-display-topright">&times;</span>
+                    <h5>Notification</h5>
+            </header>
+            <div id="box-login" class="w3-container" style="margin-top:2%;">
+                {{-- <div class="col-md-6 col-md-offset-3" style="margin-left: 10%;"> --}}
+                        <div id="output-content" style="font-size: 150%;">You need login</div>
+                        {{-- <input type="button" class="btn btn-primary w3-button" id="loginbt" value="Đăng nhập"> --}}
+                        <a href="{{route('login')}}" class="btn btn-primary w3-button">Login</a>
+                {{-- </div> --}}
+            </div>
+        </div>
     </div>
     <script type="text/javascript" src="{{asset('js/event.js')}}"></script>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $("#order").on('click', function() {
+                // alert("hello");
+                $("#yesno-box").show();
+                $("#yes").on('click', function() {
+                    $("#yesno-box").hide();
+                    var idEating = $("#idEating").val();
+                    var quantity = $("#quantity").val();
+                    // alert(idEating + quantity);
+                    $.get("order", {idEating : idEating, quantity : quantity}, function(data) {
+                       // $("#notification").html(data);
+                       if (data == 'Successed') {
+                            $("#notification").html(data);
+                       } else {
+                            $("#order-box").hide();
+                            $("#login-box").show();
+                       }
+                    });
+                });
+                $("#no").on('click', function() {
+                    $("#yesno-box").hide();
+                });
+            });
+        });
+    </script>
 @endsection
 

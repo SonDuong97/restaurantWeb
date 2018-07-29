@@ -24,6 +24,8 @@ class Order
             }
         } else {
             return redirect()->route('login')->with('notification', 'You need login.');
+            // return "You need login";
+            // echo "You need login";
         }
         
     }
