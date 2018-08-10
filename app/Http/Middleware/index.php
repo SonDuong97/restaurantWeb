@@ -18,7 +18,7 @@ class index
     {
         if (Auth::check()) {
             if (strcmp(Auth::user()->email, "duongson29111997@gmail.com") == 0) {
-                return redirect()->route('showListProduct');
+                return redirect()->route('homePageAdmin');
             }
         }
         return $next($request);

@@ -11,8 +11,8 @@ class cateController extends Controller
 {
     public function showListCate()
     {
-        $category = category::all();
-    	return view('admin.category.showListCate', ['category' => $category]);
+        $categories = category::all();
+    	return $categories;
     }
 
     public function addCate()
@@ -22,8 +22,8 @@ class cateController extends Controller
 
     public function editCate($id)
     {
-        $category = category::find($id);
-    	return view('admin.category.editCate', ['category' => $category]);
+        $category = category::findOrFail($id);
+    	return $category;
     }
 
     public function updateCate(Request $request, $id)
@@ -41,13 +41,13 @@ class cateController extends Controller
         $validate = Validator::make($request->all(), $rules, $messages);
 
         if ($validate->fails()) {
-            return redirect()->back()->withErrors($validate)->withInput();
+            return response(['status' => 'error', 'errors' => $validate->errors()]);
         }
         $category = category::find($id);
 
         $category->categoryName = $request->txtCateName;
         $category->save();
-        return redirect()->route('editCate', ['id' => $category->id])->with('notification', 'Editting category name is successed.');
+        return response(['result' => 'successed'], 200);
 
     }
 
@@ -65,19 +65,26 @@ class cateController extends Controller
         $validate = Validator::make($request->all(), $rules, $messages);
 
         if ($validate->fails()) {
-            return redirect()->back()->withErrors($validate)->withInput();
+            return response()->json(['status' => 'error', 'errors' => $validate->errors()]);
         }
 
         $category = new category;
         $category->categoryName = $request->txtCateName;
         $category->save();
-        return redirect()->route('addCate');
+        return response(['result' => 'successed'], 200);
     }
     public function deleteCate($id)
     {
-        $user = category::find($id);
-        $user->delete();
+        $category = category::findOrFail($id);
+        if(count($category->eating) == 0) {
+            $category->delete();
+            return response()->json(['result' => 'successed']);
+        } else {
+            return response()->json(['errors' => 'Exist product in this category. Can\'t delete']);
+        }
+        // return response()->json(['result' => count($category->eating)]);
+        // $category->delete();
 
-        return redirect()->route('showListCate');
+        // return response([]);
     }
 }

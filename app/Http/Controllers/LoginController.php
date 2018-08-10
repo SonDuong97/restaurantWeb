@@ -41,7 +41,7 @@ class LoginController extends Controller
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::user();
                 if (strcmp($user->email, "duongson29111997@gmail.com") == 0)
-                    return redirect()->route('showListProduct');
+                    return redirect()->route('homePageAdmin');
                 else
                     return redirect()->route('home');           // echo "hello";;
             } else {

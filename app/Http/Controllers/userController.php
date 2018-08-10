@@ -15,28 +15,29 @@ class userController extends Controller
 
     public function editUser($id)
     {
-        $user = User::find($id);
-    	return view('admin.user.editUser', ['user' => $user]);
+        $user = User::findOrFail($id);
+    	return $user;
     }
 
     public function showListUser()
     {
         $users = User::all();
-    	return view('admin.user.showListUser', ['users' => $users]);
+    	return $users;
     }
 
     public function updateUser(Request $request, $id)
     {
-
-        $user = User::find($id);
-        if (strcmp($request->txtPass, $request->txtRePass) == 0) {
-            $user->email = $request->txtEmail;
-            $user->password = bcrypt($request->txtPass);
-            $user->save();
-            return redirect()->route('showListUser');
-        }
-
-        return redirect()->back()->withInput();
+        $user = User::findOrFail($id);
+        // if (strcmp($request->txtPass, $request->txtRePass) == 0) {
+        //     $user->name = $request->txtUser;
+        //     $user->password = bcrypt($request->txtPass);
+        //     $user->save();
+        //     return response()->json(['result' => 'successed']);
+        // }
+        $user->name = $request->txtUser;
+        $user->save();
+        return response()->json(['result' => 'successed']);
+        // return response()->json(['status' => 'error', 'error' => 'The NewPassword and the ReNewPassword must be the same.']);
         
     }
 
@@ -61,7 +62,7 @@ class userController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json(['status' => 'error', 'errors' => $validator->errors()]);
         }
 
         $user = new User;
@@ -69,7 +70,7 @@ class userController extends Controller
         $user->password = bcrypt($request->txtPass);
         $user->email = $request->txtEmail;
         $user->save();
-        return redirect()->route('addUser')->with('notification', 'Adding acount is successed.');
+        return response()->json(['result' => 'successed']);
 
         // return redirect()->back()->withInput();
     }

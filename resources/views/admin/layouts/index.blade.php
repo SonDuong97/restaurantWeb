@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Khóa Học Lập Trình Laravel Framework 5.x Tại Khoa Phạm">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin</title>
 
     <base href="{{asset('')}}">
-
+    {{-- <link rel="stylesheet" type="text/css" href="css/app.css"> --}}
     <!-- Bootstrap Core CSS -->
     <link href="admin_assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -27,6 +28,7 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="admin_assets/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    {{-- <link rel="stylesheet" type="text/css" href="css/app.css"> --}}
 </head>
 
 <body>
@@ -37,12 +39,15 @@
         @include('admin.layouts.header')
 
         <!-- Page Content -->
-        @yield('content')
+        {{-- @yield('content') --}}
+        <router-view name="showListProduct"></router-view>
+        <router-view></router-view>
+        {{-- <add-product></add-product> --}}
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
-
+    <script src="js/app.js"></script>
     <!-- jQuery -->
     <script src="admin_assets/bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -57,18 +62,19 @@
 
     <!-- DataTables JavaScript -->
     <script src="admin_assets/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="js/app.js"></script> --}}
     <script src="admin_assets/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    {{-- <script src="js/app.js"></script> --}}
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
+{{--     <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
                 responsive: true
         });
     });
     
-    </script>
-    @yield('script')
+    </script> --}}
 </body>
 
 </html>

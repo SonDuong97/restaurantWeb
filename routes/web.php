@@ -26,6 +26,9 @@ Route::match(['get', 'post'],'order', ['as' => 'order', 'middleware' => 'order',
 
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => 'login'], function () {
+	Route::get('/', function() {
+		return view('admin.layouts.index');
+	})->name('homePageAdmin');
 	Route::group(['prefix' => 'product'], function() {
 		Route::get('add', 'productController@addProduct')->name('addProduct');
 		Route::get('showList', 'productController@showListProduct')->name('showListProduct');
@@ -92,4 +95,11 @@ Route::get('demo', function () {
 		// echo "<br>";
 	// 	echo $eating->eatingName."<br>";
 	// }
+	$data = eating::find(1);
+	dd($data);
+	// echo $data->name;
+});
+
+Route::get('vue', function() {
+	return view('welcome');
 });
