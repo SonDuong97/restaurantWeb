@@ -5,19 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\order;
 use Validator;
+use App\User;
+use App\Http\Resources\OrderResource;
 
 class orderController extends Controller
 {
     public function showListOrder()
     {	
-    	$orders = order::all();
-    	return view('admin.order.showListOrder', ['orders' => $orders]);
+    	// $users = order::all();
+
+    	return OrderResource::collection(order::all());
     }
 
     public function editOrder($id)
     {
-    	$order = order::find($id);
-    	return view('admin.order.editOrder', ['order' => $order]);
+    	$order = order::findOrFail($id);
+    	return new OrderResource($order);
     }
 
     public function updateOrder(Request $request, $id)
@@ -27,6 +30,6 @@ class orderController extends Controller
         $order->status = $request->status;
         $order->save();
 
-        return redirect()->route('editOrder', ['id' => $id])->with('notification', 'Updating order is successed.');
+        return response()->json(['result' => 'Successed']);
     }
 }

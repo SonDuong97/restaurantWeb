@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\eating;
+use App\category;
+use App\Http\Requests;
+use Validator;
 
 class ProductCtrl extends Controller
 {
@@ -88,7 +92,9 @@ class ProductCtrl extends Controller
      */
     public function edit($id)
     {
-        
+        $eating = eating::find($id);
+        $categories = category::all();
+        return response()->json(['eating' => $eating, 'categories' => $categories]);
     }
 
     /**
@@ -118,7 +124,7 @@ class ProductCtrl extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json(['status' => 'error', 'errors' => $validator->errors()]);
         }
 
         $eating = eating::find($id);
@@ -129,8 +135,9 @@ class ProductCtrl extends Controller
         $eating->category_id = $request->cateId;
         $eating->save();
 
-        $categories = category::all();
-        return redirect()->route('editProduct', ['eating' => $eating, 'categories' => $categories])->with('notification', 'The adding product is successed.');
+        return response([
+            'result' => 'success'
+        ], 200);
     }
 
     /**
@@ -141,9 +148,9 @@ class ProductCtrl extends Controller
      */
     public function destroy($id)
     {
-        $eating = eating::find($id);
+        $eating = eating::findOrFail($id);
 
         $eating->delete();
-        return redirect()->route('showListProduct');
+        return response()->json(['result' => 'successed']);
     }
 }

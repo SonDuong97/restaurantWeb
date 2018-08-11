@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'login'], function () {
 		Route::post('addEating', 'productController@addEating')->name('addEating');
 		Route::get('deleteEating/{id?}', 'productController@deleteEating')->name('deleteEating');
 	});
+	// Route::resource('product', 'ProductCtrl');
 
 	Route::group(['prefix' => 'user'], function() {
 		Route::get('showList', 'userController@showListUser')->name('showListUser');
@@ -89,7 +89,7 @@ Route::get('demo', function () {
 	// Model order
 	// 
 	// $order = order::find(1);
-	// dd($order->eating);
+	// dd($order->user);
 	// foreach ($order->eating as $eating) {
 		
 		// echo "<br>";
