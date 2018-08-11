@@ -28,38 +28,39 @@ Route::group(['prefix' => 'admin', 'middleware' => 'login'], function () {
 	Route::get('/', function() {
 		return view('admin.layouts.index');
 	})->name('homePageAdmin');
-	Route::group(['prefix' => 'product'], function() {
-		Route::get('add', 'productController@addProduct')->name('addProduct');
-		Route::get('showList', 'productController@showListProduct')->name('showListProduct');
-		Route::get('edit/{id?}', 'productController@editProduct')->name('editProduct');
-		Route::post('update/{id?}', 'productController@updateEating')->name('updateEatingInfo');
-		Route::post('addEating', 'productController@addEating')->name('addEating');
-		Route::get('deleteEating/{id?}', 'productController@deleteEating')->name('deleteEating');
-	});
-	// Route::resource('product', 'ProductCtrl');
+	// Route::group(['prefix' => 'product'], function() {
+	// 	Route::get('add', 'productController@addProduct')->name('addProduct');
+	// 	Route::get('showList', 'productController@showListProduct')->name('showListProduct');
+	// 	Route::get('edit/{id?}', 'productController@editProduct')->name('editProduct');
+	// 	Route::post('update/{id?}', 'productController@updateEating')->name('updateEatingInfo');
+	// 	Route::post('addEating', 'productController@addEating')->name('addEating');
+	// 	Route::get('deleteEating/{id?}', 'productController@deleteEating')->name('deleteEating');
+	// });
+	Route::resource('product', 'ProductCtrl', ['except' => ['show']]);
 
-	Route::group(['prefix' => 'user'], function() {
-		Route::get('showList', 'userController@showListUser')->name('showListUser');
-		Route::get('add', 'userController@addUser')->name('addUser');
-		Route::get('edit/{id?}', 'userController@editUser')->name('editUser');
-		Route::post('update/{id?}', 'userController@updateUser')->name('updateUserInfo');
-		Route::post('addAccount', 'userController@addAccount')->name('addAccount');
-	});
-
-	Route::group(['prefix' => 'category'], function() {
-		Route::get('showList', 'cateController@showListCate')->name('showListCate');
-		Route::get('add', 'cateController@addCate')->name('addCate');
-		Route::get('edit/{id?}', 'cateController@editCate')->name('editCate');
-		Route::post('update/{id?}', 'cateController@updateCate')->name('updateCate');
-		Route::post('addCate', 'cateController@addCategory')->name('addCategory');
-		Route::get('delete/{id?}', 'cateController@deleteCate')->name('deleteCate');
-	});
-
-	Route::group(['prefix' => 'order'], function () {
-		Route::get('showList', 'orderController@showListOrder')->name('showListOrder');
-		Route::get('edit/{id?}', 'orderController@editOrder')->name('editOrder');
-		Route::post('update/{id?}', 'orderController@updateOrder')->name('updateOrderInfo');
-	});
+	// Route::group(['prefix' => 'user'], function() {
+	// 	Route::get('showList', 'userController@showListUser')->name('showListUser');
+	// 	Route::get('add', 'userController@addUser')->name('addUser');
+	// 	Route::get('edit/{id?}', 'userController@editUser')->name('editUser');
+	// 	Route::post('update/{id?}', 'userController@updateUser')->name('updateUserInfo');
+	// 	Route::post('addAccount', 'userController@addAccount')->name('addAccount');
+	// });
+	Route::resource('user', 'UserCtrl', ['except' => ['create', 'show', 'destroy']]);
+	// Route::group(['prefix' => 'category'], function() {
+	// 	Route::get('showList', 'cateController@showListCate')->name('showListCate');
+	// 	Route::get('add', 'cateController@addCate')->name('addCate');
+	// 	Route::get('edit/{id?}', 'cateController@editCate')->name('editCate');
+	// 	Route::post('update/{id?}', 'cateController@updateCate')->name('updateCate');
+	// 	Route::post('addCate', 'cateController@addCategory')->name('addCategory');
+	// 	Route::get('delete/{id?}', 'cateController@deleteCate')->name('deleteCate');
+	// });
+	Route::resource('category', 'CategoryCtrl', ['except' => ['show', 'create']]);
+	// Route::group(['prefix' => 'order'], function () {
+	// 	Route::get('showList', 'orderController@showListOrder')->name('showListOrder');
+	// 	Route::get('edit/{id?}', 'orderController@editOrder')->name('editOrder');
+	// 	Route::post('update/{id?}', 'orderController@updateOrder')->name('updateOrderInfo');
+	// });
+	Route::resource('order', 'OrderCtrl', ['except' => ['create', 'show', 'store', 'destroy']]);
 });
 
 use App\category;

@@ -65,12 +65,12 @@
 		},
 		methods: {
 			getListCategories() {
-				axios.get('admin/product/add').then(response => {
+				axios.get('admin/category').then(response => {
 					this.categories = response.data
 				})
 			},
 			addProduct() {
-				axios.post('admin/product/addEating', {
+				axios.post('admin/product', {
 					txtName: this.product.name,
 					txtPrice: this.product.price,
 					txtIntro: this.product.intro,
@@ -81,15 +81,6 @@
 					if (response.data.result) {
 						this.result = response.data.result	
 					} else {
-						// if(response.data.errors.txtName) {
-      //              		this.errors.push(response.data.errors.txtName)
-	     //               	}
-		   	// 			if(response.data.errors.txtIntro) {
-		   	// 				this.errors.push(response.data.errors.txtIntro)
-		   	// 			}
-		   	// 			if(response.data.errors.txtPrice) {
-		   	// 				this.errors.push(response.data.errors.txtPrice)
-		   	// 			}
 		   				if(response.data.errors) {
 		   					this.errors = Object.values(response.data.errors)
 		   				}

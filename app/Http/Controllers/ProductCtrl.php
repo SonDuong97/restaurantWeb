@@ -7,6 +7,7 @@ use App\eating;
 use App\category;
 use App\Http\Requests;
 use Validator;
+use App\Http\Resources\EatingResource;
 
 class ProductCtrl extends Controller
 {
@@ -18,7 +19,7 @@ class ProductCtrl extends Controller
     public function index()
     {
         $eating = eating::all();
-        return $eating;
+        return EatingResource::collection($eating);
     }
 
     /**
@@ -149,8 +150,11 @@ class ProductCtrl extends Controller
     public function destroy($id)
     {
         $eating = eating::findOrFail($id);
-
-        $eating->delete();
-        return response()->json(['result' => 'successed']);
+        if (count($eating->order) != 0) {
+            return response()->json(['status' => 'error', 'errors' => 'Can\'t this product. It exists in an order']);
+        } else {
+            $eating->delete();
+            return response()->json(['result' => 'successed']);
+        }
     }
 }

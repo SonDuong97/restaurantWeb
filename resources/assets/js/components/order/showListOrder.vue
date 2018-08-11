@@ -49,7 +49,7 @@
 		},
 		methods: {
 			getOrderList() {
-				axios.get('admin/order/showList').then(response => {
+				axios.get('admin/order').then(response => {
 					this.orders = response.data
 				}).catch(errors => {
 					console.log(errors)

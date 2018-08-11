@@ -54,7 +54,7 @@
 		},
 		created() {
 			var id = this.$route.params.id
-			axios.get('admin/user/edit/' + id).then(response => {
+			axios.get('admin/user/' + id + '/edit').then(response => {
 				this.user = response.data
 			}). catch(errors => {
 				console.log(errors)
@@ -62,7 +62,7 @@
 		},
 		methods: {
 			editUser() {
-				axios.post('admin/user/update/' + this.user.id, {
+				axios.put('admin/user/' + this.user.id, {
 					'txtUser': this.user.name
 				}).then(response => {
 					this.result = ''

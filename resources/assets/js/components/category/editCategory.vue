@@ -43,7 +43,7 @@
 		},
 		created() {
 			let id = this.$route.params.id
-			axios.get('admin/category/edit/' + id).then(response => {
+			axios.get('admin/category/' + id + '/edit').then(response => {
 				this.category = response.data
 			}).catch(error => {
 				console.log(error)
@@ -51,7 +51,7 @@
 		},
 		methods: {
 			editCategory() {
-				axios.post('admin/category/update/' + this.category.id, {
+				axios.put('admin/category/' + this.category.id, {
 					txtCateName: this.category.categoryName
 				}).then(response => {
 					this.errors = []

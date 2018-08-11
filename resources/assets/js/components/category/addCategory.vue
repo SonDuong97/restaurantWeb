@@ -43,7 +43,7 @@
 		},
 		methods: {
 			addCategory() {
-				axios.post('admin/category/addCate', {txtCateName: this.categoryName}).then(response => {
+				axios.post('admin/category', {txtCateName: this.categoryName}).then(response => {
 					this.errors = []
 					this.result = ''
 					if (response.data.result) {

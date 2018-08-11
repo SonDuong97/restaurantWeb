@@ -45,7 +45,7 @@
 		},
 		methods: {
 			getUserList() {
-				axios.get('admin/user/showList').then(response => {
+				axios.get('admin/user').then(response => {
 					this.users = response.data
 				}).catch(errors => {
 					console.log(errors)

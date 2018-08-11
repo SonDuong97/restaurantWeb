@@ -22,11 +22,11 @@
 	                        <label>ID</label>
 	                        <input class="form-control" name="id" v-model="order.id" disabled />
 	                    </div>
-	                    <div class="form-group">
+	                    <div class="form-group" v-if="order.user">
 	                        <label>Email</label>
 	                        <input class="form-control" name="email" v-model="order.user.email" disabled />
 	                    </div>
-	                    <div class="form-group">
+	                    <div class="form-group" v-if="order.user">
 	                        <label>Username</label>
 	                        <input class="form-control" name="username" v-model="order.user.name" disabled />
 	                    </div>
@@ -62,7 +62,7 @@
 		},
 		created() {
 			var id = this.$route.params.id
-			axios.get('admin/order/edit/' + id).then(response => {
+			axios.get('admin/order/' + id + '/edit').then(response => {
 				this.order = response.data
 			}).catch(errors => {
 				console.log(errors)
@@ -70,7 +70,7 @@
 		},
 		methods:{
 			editOrder() {
-				axios.post("admin/order/update/" + this.order.id, {
+				axios.put("admin/order/" + this.order.id, {
 					'status': this.order.status
 				}).then(response => {
 					this.errors = []

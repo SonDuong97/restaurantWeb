@@ -61,7 +61,7 @@
 		},
 		methods: {
 			addUser() {
-				axios.post('admin/user/addAccount', {
+				axios.post('admin/user', {
 					'txtEmail': this.user.email,
 					'txtUser': this.user.name,
 					'txtPass': this.user.password,

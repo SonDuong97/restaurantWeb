@@ -50091,7 +50091,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		getListProducts: function getListProducts() {
 			var _this = this;
 
-			axios.get('admin/product/showList').then(function (response) {
+			axios.get('admin/product').then(function (response) {
 				_this.products = response.data;
 			});
 		},
@@ -50099,7 +50099,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this2 = this;
 
 			if (confirm("Do you really want to delete it?")) {
-				axios.get('admin/product/deleteEating/' + id).then(function (response) {
+				axios.delete('admin/product/' + id).then(function (response) {
 					_this2.errors = [];
 					_this2.result = '';
 					if (response.data.result) {
@@ -50180,7 +50180,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(product.description))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(product.category_id))]),
+                    _c("td", [_vm._v(_vm._s(product.category.categoryName))]),
                     _vm._v(" "),
                     _c("td", { staticClass: "center" }, [
                       _c("i", { staticClass: "fa fa-trash-o  fa-fw" }),
@@ -50380,7 +50380,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var app = this;
 		var id = app.$route.params.id;
 		// alert(id)
-		axios.get('admin/product/edit/' + id).then(function (response) {
+		axios.get('admin/product/' + id + '/edit').then(function (response) {
 			app.product = response.data.eating;
 			app.categories = response.data.categories;
 			console.log(app.categories);
@@ -50401,7 +50401,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		editProduct: function editProduct() {
 			var _this = this;
 
-			axios.post('admin/product/update/' + this.product.id, {
+			axios.put('admin/product/' + this.product.id, {
 				txtName: this.product.eatingName,
 				txtPrice: this.product.cost,
 				txtIntro: this.product.description,
@@ -50759,14 +50759,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		getListCategories: function getListCategories() {
 			var _this = this;
 
-			axios.get('admin/product/add').then(function (response) {
+			axios.get('admin/category').then(function (response) {
 				_this.categories = response.data;
 			});
 		},
 		addProduct: function addProduct() {
 			var _this2 = this;
 
-			axios.post('admin/product/addEating', {
+			axios.post('admin/product', {
 				txtName: this.product.name,
 				txtPrice: this.product.price,
 				txtIntro: this.product.intro,
@@ -50777,15 +50777,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				if (response.data.result) {
 					_this2.result = response.data.result;
 				} else {
-					// if(response.data.errors.txtName) {
-					//              		this.errors.push(response.data.errors.txtName)
-					//               	}
-					// 			if(response.data.errors.txtIntro) {
-					// 				this.errors.push(response.data.errors.txtIntro)
-					// 			}
-					// 			if(response.data.errors.txtPrice) {
-					// 				this.errors.push(response.data.errors.txtPrice)
-					// 			}
 					if (response.data.errors) {
 						_this2.errors = Object.values(response.data.errors);
 					}
@@ -51131,7 +51122,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		getCategory: function getCategory() {
 			var _this = this;
 
-			axios.get('admin/category/showList').then(function (response) {
+			axios.get('admin/category').then(function (response) {
 				_this.categories = response.data;
 			}).catch(function (error) {
 				console.log(error);
@@ -51141,7 +51132,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this2 = this;
 
 			if (confirm("Do you really want to delete it?")) {
-				axios.get('admin/category/delete/' + id).then(function (response) {
+				axios.delete('admin/category/' + id).then(function (response) {
 					_this2.errors = [];
 					_this2.result = '';
 					if (response.data.result) {
@@ -51403,7 +51394,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		addCategory: function addCategory() {
 			var _this = this;
 
-			axios.post('admin/category/addCate', { txtCateName: this.categoryName }).then(function (response) {
+			axios.post('admin/category', { txtCateName: this.categoryName }).then(function (response) {
 				_this.errors = [];
 				_this.result = '';
 				if (response.data.result) {
@@ -51638,7 +51629,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this = this;
 
 		var id = this.$route.params.id;
-		axios.get('admin/category/edit/' + id).then(function (response) {
+		axios.get('admin/category/' + id + '/edit').then(function (response) {
 			_this.category = response.data;
 		}).catch(function (error) {
 			console.log(error);
@@ -51649,7 +51640,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		editCategory: function editCategory() {
 			var _this2 = this;
 
-			axios.post('admin/category/update/' + this.category.id, {
+			axios.put('admin/category/' + this.category.id, {
 				txtCateName: this.category.categoryName
 			}).then(function (response) {
 				_this2.errors = [];
@@ -51892,7 +51883,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		getUserList: function getUserList() {
 			var _this = this;
 
-			axios.get('admin/user/showList').then(function (response) {
+			axios.get('admin/user').then(function (response) {
 				_this.users = response.data;
 			}).catch(function (errors) {
 				console.log(errors);
@@ -52120,7 +52111,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		addUser: function addUser() {
 			var _this = this;
 
-			axios.post('admin/user/addAccount', {
+			axios.post('admin/user', {
 				'txtEmail': this.user.email,
 				'txtUser': this.user.name,
 				'txtPass': this.user.password,
@@ -52463,7 +52454,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this = this;
 
 		var id = this.$route.params.id;
-		axios.get('admin/user/edit/' + id).then(function (response) {
+		axios.get('admin/user/' + id + '/edit').then(function (response) {
 			_this.user = response.data;
 		}).catch(function (errors) {
 			console.log(errors);
@@ -52474,7 +52465,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		editUser: function editUser() {
 			var _this2 = this;
 
-			axios.post('admin/user/update/' + this.user.id, {
+			axios.put('admin/user/' + this.user.id, {
 				'txtUser': this.user.name
 			}).then(function (response) {
 				_this2.result = '';
@@ -52707,7 +52698,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		getOrderList: function getOrderList() {
 			var _this = this;
 
-			axios.get('admin/order/showList').then(function (response) {
+			axios.get('admin/order').then(function (response) {
 				_this.orders = response.data;
 			}).catch(function (errors) {
 				console.log(errors);
@@ -52957,7 +52948,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this = this;
 
 		var id = this.$route.params.id;
-		axios.get('admin/order/edit/' + id).then(function (response) {
+		axios.get('admin/order/' + id + '/edit').then(function (response) {
 			_this.order = response.data;
 		}).catch(function (errors) {
 			console.log(errors);
@@ -52968,7 +52959,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		editOrder: function editOrder() {
 			var _this2 = this;
 
-			axios.post("admin/order/update/" + this.order.id, {
+			axios.put("admin/order/" + this.order.id, {
 				'status': this.order.status
 			}).then(function (response) {
 				_this2.errors = [];
@@ -53069,57 +53060,69 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Email")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.order.user.email,
-                        expression: "order.user.email"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { name: "email", disabled: "" },
-                    domProps: { value: _vm.order.user.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _vm.order.user
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Email")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.order.user.email,
+                            expression: "order.user.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "email", disabled: "" },
+                        domProps: { value: _vm.order.user.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.order.user,
+                              "email",
+                              $event.target.value
+                            )
+                          }
                         }
-                        _vm.$set(_vm.order.user, "email", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
+                      })
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Username")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.order.user.name,
-                        expression: "order.user.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { name: "username", disabled: "" },
-                    domProps: { value: _vm.order.user.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _vm.order.user
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Username")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.order.user.name,
+                            expression: "order.user.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "username", disabled: "" },
+                        domProps: { value: _vm.order.user.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.order.user,
+                              "name",
+                              $event.target.value
+                            )
+                          }
                         }
-                        _vm.$set(_vm.order.user, "name", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
+                      })
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Total Money")]),

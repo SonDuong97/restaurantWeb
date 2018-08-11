@@ -53,7 +53,7 @@
 			let app = this
 			let id = app.$route.params.id
 			// alert(id)
-			axios.get('admin/product/edit/' + id).then(response => {
+			axios.get('admin/product/' + id + '/edit').then(response => {
 				app.product = response.data.eating
 				app.categories = response.data.categories
 				console.log(app.categories)
@@ -72,7 +72,7 @@
 		},
 		methods: {
 			editProduct() {
-				axios.post('admin/product/update/' + this.product.id, {
+				axios.put('admin/product/' + this.product.id, {
 					txtName: this.product.eatingName,
 					txtPrice: this.product.cost,
 					txtIntro: this.product.description,

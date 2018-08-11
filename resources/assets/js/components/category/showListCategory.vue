@@ -59,7 +59,7 @@
 		},
 		methods: {
 			getCategory() {
-				axios.get('admin/category/showList').then(response => {
+				axios.get('admin/category').then(response => {
 					this.categories = response.data
 				}).catch(error => {
 					console.log(error)
@@ -67,7 +67,7 @@
 			},
 			deleteCategory(id, index) {
 				if (confirm("Do you really want to delete it?")) {
-					axios.get('admin/category/delete/' + id).then(response => {
+					axios.delete('admin/category/' + id).then(response => {
 						this.errors = []
 						this.result = ''
 						if (response.data.result) {

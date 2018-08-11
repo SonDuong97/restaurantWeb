@@ -37,7 +37,7 @@
 		                        <td>{{product.eatingName}}</td>
 		                        <td>{{product.cost}} USD</td>
 		                        <td>{{product.description}}</td>
-		                        <td>{{product.category_id}}</td>
+		                        <td>{{product.category.categoryName}}</td>
 		                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a @click="deleteProduct(product.id, index)"> Delete</a></td>
 		                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <router-link :to="{name: 'editProduct', params: {id: product.id}}">Edit</router-link></td>
 		                    </tr>
@@ -62,13 +62,13 @@
 		},
 		methods: {
 			getListProducts() {
-				axios.get('admin/product/showList').then(response => {
+				axios.get('admin/product').then(response => {
 					this.products = response.data
 				})
 			},
 			deleteProduct(id, index) {
 				if (confirm("Do you really want to delete it?")) {
-					axios.get('admin/product/deleteEating/' + id).then(response => {
+					axios.delete('admin/product/' + id).then(response => {
 						this.errors = []
 						this.result = ''
 						if (response.data.result) {
