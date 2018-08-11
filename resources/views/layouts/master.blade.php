@@ -137,7 +137,7 @@
                         @endforeach
                     </div>
                     <div id="filling-in-form">
-                        <form action="" method="" id="in-form">
+                        <form action="" method="" id="in-form" onsubmit.prevent>
                             <div id="form-1">
                                 <span class="fix-margin">Name:</span>
                                 <input type="text" id="name" class="frame" name="name" placeholder="your name *" required="">
@@ -151,7 +151,7 @@
                                 <input type="number" id="party-number" class="frame" name="party-number" placeholder="party number">
                             </div>
                             <div id="container-submit">
-                                <input type="submit" id="submit" name="submit" value="Book now!">
+                                <input type="button" id="submit" name="submit" value="Book now!">
                             </div>
                         </form>
                     </div>
