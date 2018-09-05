@@ -46,14 +46,13 @@
         <div style="clear: both;"></div>
         <div id="menu">
             <div id="container-left">
-                @foreach($category as $cate)
+                @for($i = 0; $i < round(count($category)/2); $i++)
                         <div id="appetisers" class="eating">
                             <ul class="list">
                                 <li>
                                     <div id="sub-appertisers">
-                                        @if ($cate->id == 1 || $cate->id == 2)
-                                            <div class="type-eating font-yeseva-one">{{$cate->categoryName}}</div>
-                                            @foreach($cate->eating as $eating)
+                                            <div class="type-eating font-yeseva-one">{{$category[$i]->categoryName}}</div>
+                                            @foreach($category[$i]->eating as $eating)
                                                 <ul class="list w3-button content-button" onclick="showEating({{$eating->id}}, '{{$eating->eatingName}}')">
                                                     <li class="name-and-cost">
                                                         <span class="name-eating">{{$eating->eatingName}}</span>
@@ -65,22 +64,20 @@
                                                     </li>
                                                 </ul>
                                             @endforeach
-                                        @endif
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                @endforeach
+                @endfor
             </div>
             <div id="container-right">
-                @foreach($category as $cate)
+                @for($i = round(count($category)/2); $i < count($category); $i++)
                         <div id="appetisers" class="eating">
                             <ul class="list">
                                 <li>
                                     <div id="sub-appertisers">
-                                        @if ($cate->id == 3 || $cate->id == 4)
-                                            <div class="type-eating font-yeseva-one">{{$cate->categoryName}}</div>
-                                            @foreach($cate->eating as $eating)
+                                            <div class="type-eating font-yeseva-one">{{$category[$i]->categoryName}}</div>
+                                            @foreach($category[$i]->eating as $eating)
                                                 <ul class="list w3-button content-button" onclick="showEating({{$eating->id}}, '{{$eating->eatingName}}')">
                                                     <li class="name-and-cost">
                                                         <span class="name-eating">{{$eating->eatingName}}</span>
@@ -92,12 +89,11 @@
                                                     </li>
                                                 </ul>
                                             @endforeach
-                                        @endif
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                @endforeach
+                @endfor
             </div>
             <div style="clear: both;"></div>
         </div>

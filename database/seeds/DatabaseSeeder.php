@@ -48,10 +48,15 @@ class eatingSeeder extends Seeder
 			['eatingName' => 'Tzatsiki', 'category_id' => 1, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 3.99],
 			['eatingName' => 'Aubergine_Salad', 'category_id' => 1, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.50],
 			['eatingName' => 'Aubergine_Salad', 'category_id' => 1, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.25],
+			['eatingName' => 'Aubergine_Salad', 'category_id' => 2, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.25],
 			['eatingName' => 'Haloumi', 'category_id' => 2, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 3.99],
 			['eatingName' => 'Spinach_Pie', 'category_id' => 2, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.50],
 			['eatingName' => 'Olive_Special', 'category_id' => 3, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 5.99],
-			['eatingName' => 'Cornish_Mackerel', 'category_id' => 4, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 5.99]
+			['eatingName' => 'Aubergine_Salad', 'category_id' => 3, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.50],
+			['eatingName' => 'Aubergine_Salad', 'category_id' => 3, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.25],
+			['eatingName' => 'Cornish_Mackerel', 'category_id' => 4, 'description' => 'Refreshing traditional cucumber and garlic yoghurt dip.', 'cost' => 5.99],
+			['eatingName' => 'Aubergine_Salad', 'category_id' => 4, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.50],
+			['eatingName' => 'Aubergine_Salad', 'category_id' => 4, 'description' => 'Pureed eggplant, garlic, green pepper and tomato dip.', 'cost' => 5.25]
 
 		]);
 	}
