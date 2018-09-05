@@ -40,7 +40,7 @@
 
         <!-- Page Content -->
         {{-- @yield('content') --}}
-        <router-view name="showListProduct"></router-view>
+        {{-- <router-view name="showListProduct"></router-view> --}}
         <router-view></router-view>
         {{-- <add-product></add-product> --}}
         <!-- /#page-wrapper -->
